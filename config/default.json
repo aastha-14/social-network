@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://aastha:aastha@cluster0.csujc.mongodb.net/socialnetwork?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://aastha:aastha@cluster0.csujc.mongodb.net/socialnetwork?retryWrites=true&w=majority",
+  "jwtSecret": "788d7e8874bada5aeea50bcdb3b03a9f29ed5c827f08102ef2a6b87f818001d82b0a31355e2ca"
 }
