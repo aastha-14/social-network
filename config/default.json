@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://aastha:aastha@cluster0.csujc.mongodb.net/socialnetwork?retryWrites=true&w=majority",
-  "jwtSecret": "788d7e8874bada5aeea50bcdb3b03a9f29ed5c827f08102ef2a6b87f818001d82b0a31355e2ca"
+  "jwtSecret": "788d7e8874bada5aeea50bcdb3b03a9f29ed5c827f08102ef2a6b87f818001d82b0a31355e2ca",
+  "gitHubClientID": "ba6d1c2be246c7302945",
+  "gitHubSecret": "d61455ba1ea48d00d29eff9f649f3098e44cf1a0"
 }
