@@ -2,15 +2,18 @@ const express = require("express");
 const router = express.Router();
 const Profile = require("../../models/Profile");
 const User = require("../../models/Users");
+const Post = require("../../models/Posts");
+
 const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
 const config = require("config");
 const request = require("request");
+
 // @route   GET api/profile/myProfile
 // @desc    Get current users profile
 // @access  Private
 
-router.get("/myPofile", auth, async (req, res) => {
+router.get("/myProfile", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
@@ -52,7 +55,7 @@ router.post(
       bio,
       githubusername,
       youtube,
-      twiter,
+      twitter,
       facebook,
       linkedin,
       instagram,
@@ -75,7 +78,7 @@ router.post(
 
     profileFields.social = {};
     if (youtube) profileFields.social.youtube = youtube;
-    if (twiter) profileFields.social.twiter = twiter;
+    if (twitter) profileFields.social.twitter = twitter;
     if (facebook) profileFields.social.facebook = facebook;
     if (linkedin) profileFields.social.linkedin = linkedin;
     if (instagram) profileFields.social.instagram = instagram;
@@ -109,6 +112,7 @@ router.post(
 router.get("/", async (req, res) => {
   try {
     const profiles = await Profile.find().populate("user", ["name", "avatar"]);
+    if (!profiles) res.status(400).json({ msg: "No profiles exists" });
     res.json(profiles);
   } catch (e) {
     console.error(e.message);
@@ -142,10 +146,13 @@ router.get("/user/:id", async (req, res) => {
 // @access  Private
 router.delete("/", auth, async (req, res) => {
   try {
+    // remove posts
+    await Post.deleteMany({ user: req.user.id });
+    // remove profile
     await Profile.findOneAndRemove({
       user: req.user.id,
     });
-
+    // remove user
     await User.findOneAndRemove({
       _id: req.user.id,
     });
