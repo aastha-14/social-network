@@ -98,11 +98,8 @@ router.put("/like/:post_id", auth, async (req, res) => {
 
     if (!post) res.status(404).json({ msg: "No post found!" });
 
-    // check if the post has alredy been liked
-    if (
-      post.likes.filter((like) => like.user.toString() === req.user.id).length >
-      0
-    ) {
+    // check if the post has alraedy been liked
+    if (post.likes.some((like) => like.user.toString() === req.user.id)) {
       res.status(400).json({ msg: "Post already liked" });
     }
 
@@ -127,10 +124,10 @@ router.put("/unlike/:post_id", auth, async (req, res) => {
 
     if (!post) res.status(404).json({ msg: "No post found!" });
 
-    // check if the post has alredy been liked
+    // check if the post has been liked yet
     if (
-      post.likes.filter((like) => like.user.toString() === req.user.id)
-        .length == 0
+      post.likes.some((like) => like.user.toString() === req.user.id).length ==
+      0
     ) {
       res.status(400).json({ msg: "Post has not been liked yet" });
     }

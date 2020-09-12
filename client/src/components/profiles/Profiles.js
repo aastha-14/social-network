@@ -10,7 +10,7 @@ function Profiles({ getProfiles, profile: { profiles, loading } }) {
   }, [getProfiles]);
   return (
     <div>
-      {loading ? (
+      {profiles === null || loading ? (
         <Spinner />
       ) : (
         <>
