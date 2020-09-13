@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const config = require("config");
 const User = require("../../models/Users");
+const normalize = require("normalize-url");
 
 // @route   POST api/users
 // @desc    Register user
@@ -36,8 +37,14 @@ router.post(
           .status(400)
           .json({ error: [{ msg: "User already exists" }] });
       }
-      const avatar = gravatar.url(email, { s: "200", r: "pg", d: "mm" });
-
+      const avatar = normalize(
+        gravatar.url(email, {
+          s: "200",
+          r: "pg",
+          d: "mm",
+        }),
+        { forceHttps: true }
+      );
       user = new User({
         name,
         email,

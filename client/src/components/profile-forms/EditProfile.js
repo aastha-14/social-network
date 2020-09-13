@@ -57,7 +57,18 @@ function EditProfile({
       facebook: loading || !profile.social ? "" : profile.social.facebook,
       instagram: loading || !profile.social ? "" : profile.social.instagram,
     });
-  }, [loading, getCurrentProfile]);
+  }, [
+    loading,
+    getCurrentProfile,
+    profile.company,
+    profile.website,
+    profile.location,
+    profile.status,
+    profile.skills,
+    profile.bio,
+    profile.githubusername,
+    profile.social,
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

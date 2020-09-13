@@ -10,7 +10,7 @@ import CommentItem from "../post/CommentItem";
 function Post({ getPost, post: { post, loading }, match }) {
   useEffect(() => {
     getPost(match.params.id);
-  }, [getPost]);
+  }, [getPost, match.params.id]);
   return (
     <div>
       {loading || post === null ? (

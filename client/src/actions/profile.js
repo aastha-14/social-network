@@ -104,50 +104,54 @@ export const createProfile = (formData, history, edit = false) => async (
 // Add experience
 
 export const addExperience = (formData, history) => async (dispatch) => {
-  const config = {
-    headers: { "Content-Type": "application/json" },
-  };
   try {
-    const res = axios.put("/api/profile/experience", formData, config);
+    const res = await axios.put("/api/profile/experience", formData);
 
-    dispatch({ type: UPDATE_PROFILE, payload: res.data });
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
 
     dispatch(setAlert("Experience Added", "success"));
 
     history.push("/dashboard");
-  } catch (e) {
-    const errors = e.response.data.errors;
+  } catch (err) {
+    const errors = err.response.data.errors;
+
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
+
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: e.response.statusText, status: e.response.status },
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
-
 // Add education
 
 export const addEducation = (formData, history) => async (dispatch) => {
-  const config = {
-    headers: { "Content-Type": "application/json" },
-  };
   try {
-    const res = axios.put("/api/profile/education", formData, config);
-    dispatch({ type: UPDATE_PROFILE, payload: res.data });
+    const res = await axios.put("/api/profile/education", formData);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
 
     dispatch(setAlert("Education Added", "success"));
 
     history.push("/dashboard");
-  } catch (e) {
-    const errors = e.response.data.errors;
+  } catch (err) {
+    const errors = err.response.data.errors;
+
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
+
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: e.response.statusText, status: e.response.status },
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };

@@ -19,7 +19,11 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case GET_PROFILE:
     case UPDATE_PROFILE:
-      return { ...state, profile: action.payload, loading: false };
+      return {
+        ...state,
+        profile: action.payload,
+        loading: false,
+      };
     case PROFILE_ERROR:
       return { ...state, loading: false, errors: action.payload };
     case CLEAR_PROFILE:

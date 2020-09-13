@@ -43,13 +43,13 @@ function Profile({
                 <>
                   {profile.experience.map((experience) => (
                     <ProfileExperience
-                      experience={experience}
                       key={experience._id}
+                      experience={experience}
                     />
                   ))}
                 </>
               ) : (
-                <h4>No Experience Credentials</h4>
+                <h4>No experience credentials</h4>
               )}
             </div>
             <div className="profile-edu bg-white p-2">
@@ -58,18 +58,15 @@ function Profile({
                 <>
                   {profile.education.map((education) => (
                     <ProfileEducation
-                      education={education}
                       key={education._id}
+                      education={education}
                     />
                   ))}
                 </>
               ) : (
-                <h4>No Education Credentials</h4>
+                <h4>No education credentials</h4>
               )}
             </div>
-            {profile.githubusername && (
-              <ProfileGithub username={profile.githubusername} />
-            )}
           </div>
         </>
       )}
